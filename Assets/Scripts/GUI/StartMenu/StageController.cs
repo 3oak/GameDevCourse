@@ -5,13 +5,27 @@ using TMPro;
 
 public class StageController : MonoBehaviour
 {
+    #region Attributes
+    [Header("UI Elements")]
     [SerializeField] private TMP_Text title;
     [SerializeField] private TMP_Text requirement;
     [SerializeField] private GameObject locked;
     [SerializeField] private bool isLocked;
 
+    #region Private Attributes
+    private GameObject levelWarning;
+    private GameObject panelDetails;
+    // private DetailsPanelController detailsPanel;
+    #endregion
+
+    #endregion
+
     private void Start()
     {
+        levelWarning = GameObject.FindGameObjectWithTag("LevelWarning");
+        panelDetails = GameObject.FindGameObjectWithTag("PanelDetails");
+        // detailsPanel = panelDetails.GetComponent<DetailsPanelController>();
+
         if (isLocked)
         {
             locked.SetActive(true);
@@ -27,10 +41,10 @@ public class StageController : MonoBehaviour
     {
         if (isLocked)
         {
-            // Show notification is Locked
+            levelWarning.SetActive(true);
         } else
         {
-            
+            panelDetails.SetActive(true);   
         }
     }
 }
