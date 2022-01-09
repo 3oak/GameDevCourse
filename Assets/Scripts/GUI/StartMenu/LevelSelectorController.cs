@@ -8,6 +8,7 @@ public class LevelSelectorController : MonoBehaviour
     [SerializeField] private List<GameObject> stagePrefabs;
     [SerializeField] private Transform stageParent;
     [SerializeField] private GameObject panelDetails;
+    [SerializeField] private GameObject dungeonLockedMsg;
     #endregion
 
     // Start is called before the first frame update
@@ -27,5 +28,10 @@ public class LevelSelectorController : MonoBehaviour
     public void DisplayPanelDetails()
     {
         panelDetails.SetActive(true);
+    }
+   
+    public void DungeonLockedMsg()
+    {
+        dungeonLockedMsg.SetActive(true);
     }
 }

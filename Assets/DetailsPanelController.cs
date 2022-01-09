@@ -6,7 +6,5 @@ public class DetailsPanelController : MonoBehaviour
 {
     #region Attributes
 
-
-
     #endregion
 }

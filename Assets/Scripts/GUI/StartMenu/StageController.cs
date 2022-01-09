@@ -9,11 +9,9 @@ public class StageController : MonoBehaviour
     [SerializeField] private TMP_Text requirement;
     [SerializeField] private GameObject locked;
     [SerializeField] private bool isLocked;
-    private LevelSelectorController level;
 
     private void Start()
     {
-        // Level = GameObject.FindGameObjectWithTag("PanelDetails");
         if (isLocked)
         {
             locked.SetActive(true);
@@ -32,8 +30,7 @@ public class StageController : MonoBehaviour
             // Show notification is Locked
         } else
         {
-            level = new LevelSelectorController();
-            level.DisplayPanelDetails();
+            
         }
     }
 }

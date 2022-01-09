@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
@@ -12,6 +13,7 @@ public class Settings : MonoBehaviour
 
     private const string RESOLUTION_PREF_KEY = "resolution";
     private const string FULLSCREENMODE_PREF_KEY = "fullscreenmode";
+    private const string VOLUME_PREF_KEY = "volume";
 
     #endregion
 
@@ -28,11 +30,21 @@ public class Settings : MonoBehaviour
 
     #endregion
 
+    #region Volume
+
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private Slider volumeSlider;
+
+    #endregion
+
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
+        volumeSlider.value = PlayerPrefs.GetFloat(VOLUME_PREF_KEY, 1f);
+        audioMixer.SetFloat("Volume", PlayerPrefs.GetFloat(VOLUME_PREF_KEY));
+
         HashSet<Resolution> filteredResolutions = new HashSet<Resolution>();
 
         resolutions = Screen.resolutions;
@@ -186,8 +198,20 @@ public class Settings : MonoBehaviour
 
     #endregion
 
+    #region Volume Settings
+
+    public void ChangeVolume(float volume)
+    {
+        PlayerPrefs.SetFloat(VOLUME_PREF_KEY, volume);
+        audioMixer.SetFloat("Volume", PlayerPrefs.GetFloat(VOLUME_PREF_KEY));
+    }
+
+    #endregion
+
     public void ApplyChanges()
     {
         SetAndApplyingResolution(currentResolutionIndex);
+        PlayerPrefs.SetFloat(VOLUME_PREF_KEY, volumeSlider.value);
+        audioMixer.SetFloat("Volume", volumeSlider.value);
     }
 }
